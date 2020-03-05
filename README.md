@@ -9,9 +9,17 @@
 
 [+]python manage.py startapp accounts
 
+#Models & Admin Panel  
+[+]python manage.py migrate
 
+#Create superuser
+[+] python manage.py createsuperuser
 
+# Make migrate (after create database)
+[+] python manage.py  makemigrations
 
+#Apply ur DB
+[+] python manage.py migrate
 
 ###File System
 [+]accounts<br>
@@ -24,4 +32,4 @@
 
 
 ###Time :
-[+]Part 4 <br>
+[+]Part 5 <br>
