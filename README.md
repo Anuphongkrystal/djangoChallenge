@@ -21,6 +21,9 @@
 #Apply ur DB
 [+] python manage.py migrate
 
+#use shell
+[+] python manage.py shell
+
 ###File System
 [+]accounts<br>
   [+]templates<br>
@@ -32,4 +35,4 @@
 
 
 ###Time :
-[+]Part 6 <br>
+[+]Part 7 <br>
