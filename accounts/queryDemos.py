@@ -32,6 +32,9 @@ productsFiltered = Product.objects.filter(tags__name="Sports")
 
 #11
 
+#Returns the total count for number of time a "Ball"  was ordered by the first customer
+ballOrder = firstCustomer.order_set.filter(product__name="Ball").count()
+
 allOrders = {}
 for order in firstCustomer.order_set.all():
     if order.product.name in allOrders:

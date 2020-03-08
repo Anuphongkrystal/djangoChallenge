@@ -7,22 +7,22 @@
 #Runserver
 [+]python manage.py runserver <br>
 
-[+]python manage.py startapp accounts
+[+]python manage.py startapp accounts<br>
 
 #Models & Admin Panel  
-[+]python manage.py migrate
+[+]python manage.py migrate<br>
 
 #Create superuser
-[+] python manage.py createsuperuser
+[+] python manage.py createsuperuser<br>
 
 # Make migrate (after create database)
-[+] python manage.py  makemigrations
+[+] python manage.py  makemigrations<br>
 
 #Apply ur DB
-[+] python manage.py migrate
+[+] python manage.py migrate<br>
 
 #use shell
-[+] python manage.py shell
+[+] python manage.py shell<br>
 
 ###File System
 [+]accounts<br>
@@ -35,4 +35,4 @@
 
 
 ###Time :
-[+]Part 7 <br>
+[+]Part 7 (4.06) <br>
