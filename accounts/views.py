@@ -1,8 +1,8 @@
 #เอาไว้สร้างฟังก์ชั่น สำหรับ render ข้อมูล
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
-
+from .forms import OrderForm
 # Create your views here.
 def home(request):
     orders = Order.objects.all()
@@ -31,3 +31,16 @@ def customer(request, pk_test):
     orders_count = orders.count()
     context =  {'customer':customer,'orders':orders,'orders_count':orders_count}
     return render(request,'accounts/customer.html',context)
+
+def createOrder(request):
+
+    form = OrderForm()
+    if request.method == 'POST':
+        #print('Printing POST',request.POST)
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context =  {'form':form}
+    return render(request, 'accounts/order_form.html',context)
