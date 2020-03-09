@@ -62,4 +62,11 @@ def updateOrder(request,pk):
 
 
 def deleteOrder(request,pk):
-    return render(request,'accounts/delete.html')
+    order = Order.objects.get(id=pk) #select ให้ตรงค่าที่ส่งเข้ามา
+    if request.method == "POST":
+        order.delete()
+        return redirect('/')
+
+    context = {'item':order}
+
+    return render(request,'accounts/delete.html',context)
