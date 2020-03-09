@@ -44,3 +44,22 @@ def createOrder(request):
 
     context =  {'form':form}
     return render(request, 'accounts/order_form.html',context)
+
+
+def updateOrder(request,pk):
+
+    order = Order.objects.get(id=pk) #select ให้ตรงค่าที่ส่งเข้ามา
+    form = OrderForm(instance=order)
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST,instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form':form}
+    return render(request, 'accounts/order_form.html',context)
+
+
+def deleteOrder(request,pk):
+    return render(request,'accounts/delete.html')
