@@ -24,6 +24,9 @@
 #use shell
 [+] python manage.py shell<br>
 
+#Install สำหรับกรองข้อมูล
+[+]pip install django-filter <br>
+
 ###File System
 [+]accounts<br>
   [+]templates<br>
@@ -35,4 +38,3 @@
 
 
 ###Time :
-[+] 
