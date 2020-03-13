@@ -11,9 +11,9 @@ from django.contrib.auth.decorators import login_required  # check สิทธ�
 from .models import *
 from .forms import OrderForm,CreateUserForm
 from .filters import OrderFilter
-from .decorators import unauthenticated_user 
+from .decorators import unauthenticated_user,allowed_users
 
-@unauthenticated_use
+@unauthenticated_user
 def registerPage(request):
     form = CreateUserForm()
     if request.method == 'POST':
@@ -52,8 +52,9 @@ def  loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
-@login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
 
+@login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
+@allowed_users(allowed_roles=['admin'])
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -78,6 +79,7 @@ def products(request):
 
     return render(request,'accounts/products.html',{'products':products})
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
+@allowed_users(allowed_roles=['admin'])
 
 def customer(request, pk_test):
     customer = Customer.objects.get(id=pk_test)
@@ -91,6 +93,7 @@ def customer(request, pk_test):
     context =  {'customer':customer,'orders':orders,'orders_count':orders_count,'myFilter':myFilter}
     return render(request,'accounts/customer.html',context)
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
+@allowed_users(allowed_roles=['admin'])
 
 def createOrder(request,pk):
     OrderFormSet = inlineformset_factory(Customer,Order,fields=('product','status'), extra=10) ##เพิ่มฟิลด์
@@ -108,6 +111,7 @@ def createOrder(request,pk):
     context =  {'formset':formset}
     return render(request, 'accounts/order_form.html',context)
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
+@allowed_users(allowed_roles=['admin'])
 
 def updateOrder(request,pk):
 
@@ -123,6 +127,7 @@ def updateOrder(request,pk):
     context = {'form':form}
     return render(request, 'accounts/order_form.html',context)
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
+@allowed_users(allowed_roles=['admin'])
 
 def deleteOrder(request,pk):
     order = Order.objects.get(id=pk) #select ให้ตรงค่าที่ส่งเข้ามา
