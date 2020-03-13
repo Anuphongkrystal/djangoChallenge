@@ -7,11 +7,12 @@ from django.contrib.auth.forms import UserCreationForm #register and login
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required  # check สิทธิ์ในการเข้าถึง ไฟล์
+from django.contrib.auth.models import Group 
 
 from .models import *
 from .forms import OrderForm,CreateUserForm
 from .filters import OrderFilter
-from .decorators import unauthenticated_user,allowed_users
+from .decorators import unauthenticated_user,allowed_users,admin_only
 
 @unauthenticated_user
 def registerPage(request):
@@ -54,7 +55,8 @@ def logoutUser(request):
     return redirect('login')
 
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
-@allowed_users(allowed_roles=['admin'])
+#@allowed_users(allowed_roles=['admin'])
+@admin_only
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -78,9 +80,9 @@ def products(request):
     products = Product.objects.all()
 
     return render(request,'accounts/products.html',{'products':products})
+
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
 @allowed_users(allowed_roles=['admin'])
-
 def customer(request, pk_test):
     customer = Customer.objects.get(id=pk_test)
 
