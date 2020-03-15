@@ -1,7 +1,8 @@
-###Django Challenge :
+### Django Challenge
 
-###Command With Django :
-#Startproject
+### Command With Django
+
+# Startproject
 [+] django-admin startproject djangoChallenge <br>
 
 #Runserver
@@ -10,24 +11,24 @@
 [+]python manage.py startapp accounts<br>
 
 #Models & Admin Panel  
-[+]python manage.py migrate<br>
+[+]python manage.py migrate <br>
 
 #Create superuser
-[+] python manage.py createsuperuser<br>
+[+] python manage.py createsuperuser <br>
 
 # Make migrate (after create database)
-[+] python manage.py  makemigrations<br>
+[+] python manage.py  makemigrations <br>
 
 #Apply ur DB
-[+] python manage.py migrate<br>
+[+] python manage.py migrate <br>
 
-#use shell
-[+] python manage.py shell<br>
+# use shell
+[+] python manage.py shell <br>
 
-#Install สำหรับกรองข้อมูล
-[+]pip install django-filter <br>
+# Install สำหรับกรองข้อมูล
+[+]pip install django-filter<br>
 
-###File System
+###File System<bt>
 [+]accounts<br>
   [+]templates<br>
     [+]accounts <br>
@@ -37,5 +38,5 @@
 
 
 
-###Time :
-[+] ตอนที่ 15 (นาที ที่17 i'm bug)
+### Time :
+  [+] ตอนที่ 16 มี บัค  (อาจะต้องย้อนกลับไปดูคลิปก่อนๆ)

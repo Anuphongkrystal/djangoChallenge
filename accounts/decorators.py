@@ -18,7 +18,8 @@ def allowed_users(allowed_roles=[]):
             if request.user.groups.exists():
                 group = request.user.groups.all()[0].name
             if group in allowed_roles:
-                return view_func(request, *args, **kwargs)
+                return view_func(request, *args, **kwargs) # bug
+
             else:
                 return HttpResponse("You are not authorized to view this page ")
 
@@ -26,14 +27,14 @@ def allowed_users(allowed_roles=[]):
     return decorator
 
 def admin_only(view_func):
-    def wrapper_function(request,*args,**kwargs):
+    def wrapper_function(request, *args, **kwargs):
         group = None
 
         if request.user.groups.exists(): #check group
             group= request.user.groups.all()[0].name
 
         if group == 'customer':
-            return redirect('user-page')
+            return redirect('user-page') # user-page is name in url path
 
         if group == 'admin':
             return view_func(request, *args, **kwargs)

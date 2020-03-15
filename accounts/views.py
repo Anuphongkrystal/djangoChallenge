@@ -76,8 +76,13 @@ def home(request):
     }
     return render(request,'accounts/dashboard.html',context)
 
+@login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
+@allowed_users(allowed_roles=['customer']) #bugs
 def userPage(request):
-    context = {}
+    orders = request.user.customer.order_set.all() #bug here
+    print('ORDERS:', orders)
+
+    context = {'orders':orders}
     return render(request, 'accounts/user.html',context)
 
 def products(request):
