@@ -10,16 +10,16 @@
 
 [+]python manage.py startapp accounts<br>
 
-#Models & Admin Panel  
+# Models & Admin Panel  
 [+]python manage.py migrate <br>
 
-#Create superuser
+# Create superuser
 [+] python manage.py createsuperuser <br>
 
 # Make migrate (after create database)
 [+] python manage.py  makemigrations <br>
 
-#Apply ur DB
+# Apply ur DB
 [+] python manage.py migrate <br>
 
 # use shell
@@ -28,7 +28,7 @@
 # Install สำหรับกรองข้อมูล
 [+]pip install django-filter<br>
 
-###File System<bt>
+### File System<bt>
 [+]accounts<br>
   [+]templates<br>
     [+]accounts <br>
@@ -39,4 +39,3 @@
 
 
 ### Time :
-  [+] ตอนที่ 16 มี บัค  (อาจะต้องย้อนกลับไปดูคลิปก่อนๆ)

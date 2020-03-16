@@ -25,6 +25,9 @@ def registerPage(request):
 
             group = Group.objects.get(name='customer')
             user.groups.add(group)
+            Customer.objects.create(
+                user=user,
+            )
 
             messages.success(request,'Account was created for ' + username)
             return redirect('login')
@@ -66,6 +69,7 @@ def home(request):
     customers = Customer.objects.all()
 
     total_customer = customers.count()
+
     total_orders = orders.count()
     delivered = orders.filter(status='Delivered').count()
     pending = orders.filter(status='Pending').count()
@@ -77,12 +81,23 @@ def home(request):
     return render(request,'accounts/dashboard.html',context)
 
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
-@allowed_users(allowed_roles=['customer']) #bugs
+@allowed_users(allowed_roles=['customer']) #user แต่ล่ะ คนต้องอยู่เป็น customer
 def userPage(request):
-    orders = request.user.customer.order_set.all() #bug here
+    orders = request.user.customer.order_set.all()
+
+
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+
     print('ORDERS:', orders)
 
-    context = {'orders':orders}
+    context = {
+                'orders':orders,
+                'total_orders':total_orders,
+                'delivered':delivered,
+                'pending':pending
+    }
     return render(request, 'accounts/user.html',context)
 
 def products(request):
