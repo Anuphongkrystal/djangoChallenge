@@ -9,6 +9,9 @@ urlpatterns = [
 
     path('',views.home,name="home"),
     path('user/', views.userPage, name="user-page"),
+
+    path('account/',views.accountsSettings,name="account"),
+
     path('products/',views.products,name="product"), #call function /views.py function products();
     path('customer/<str:pk_test>/',views.customer,name="customer"), #call function /views.py function customer();
 

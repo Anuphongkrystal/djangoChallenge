@@ -100,6 +100,12 @@ def userPage(request):
     }
     return render(request, 'accounts/user.html',context)
 
+@login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
+@allowed_users(allowed_roles=['customer']) #user แต่ล่ะ คนต้องอยู่เป็น customer
+def accountsSettings(request):
+    context = {}
+    return render(request,'accounts/account_settings.html')
+    
 def products(request):
     products = Product.objects.all()
 
