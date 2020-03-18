@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required  # check สิทธ�
 from django.contrib.auth.models import Group
 
 from .models import *
-from .forms import OrderForm,CreateUserForm
+from .forms import OrderForm,CreateUserForm,CustomerForm
 from .filters import OrderFilter
 from .decorators import unauthenticated_user,allowed_users,admin_only
 
@@ -74,9 +74,13 @@ def home(request):
     delivered = orders.filter(status='Delivered').count()
     pending = orders.filter(status='Pending').count()
 
-    context = {'orders':orders, 'customers':customers
-    ,'total_customer':total_customer,'total_orders':total_orders,'delivered':delivered,
-    'pending':pending
+    context = {
+            'orders':orders,
+            'customers':customers,
+            'total_customer':total_customer,
+            'total_orders':total_orders,
+            'delivered':delivered,
+            'pending':pending
     }
     return render(request,'accounts/dashboard.html',context)
 
@@ -103,9 +107,17 @@ def userPage(request):
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
 @allowed_users(allowed_roles=['customer']) #user แต่ล่ะ คนต้องอยู่เป็น customer
 def accountsSettings(request):
-    context = {}
-    return render(request,'accounts/account_settings.html')
-    
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST,request.FILES,instance=customer)
+        if form.is_valid():
+            form.save()
+
+    context = {'form':form}
+    return render(request,'accounts/account_settings.html',context)
+
 def products(request):
     products = Product.objects.all()
 
@@ -122,7 +134,12 @@ def customer(request, pk_test):
     myFilter = OrderFilter(request.GET, queryset=orders)
     orders = myFilter.qs
 
-    context =  {'customer':customer,'orders':orders,'orders_count':orders_count,'myFilter':myFilter}
+    context =  {
+            'customer':customer,
+            'orders':orders,
+            'orders_count':orders_count,
+            'myFilter':myFilter
+    }
     return render(request,'accounts/customer.html',context)
 @login_required(login_url='login') # ต้อง login ก่อน ถึงไปหน้านั้นๆๆได้
 @allowed_users(allowed_roles=['admin'])

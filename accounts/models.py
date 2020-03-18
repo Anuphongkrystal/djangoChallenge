@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 # Create your models here
 # แยกกัน commit migrate ที่ล่ะ class เพราะมันจะ สร้างไฟล์ให้เราใหม่ทุกครั้งที่ทำการ migrate
 class Customer(models.Model):
-    user =   models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user =   models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name =   models.CharField(max_length=200,null = True)
     phone =  models.CharField(max_length=200,null = True)
     email =  models.CharField(max_length=200,null = True)
-    profile_pic = models.ImageField(null=True,blank=True)
+    profile_pic = models.ImageField(default="users.jpg",null=True,blank=True)
     date_created = models.DateTimeField(auto_now_add = True,null = True)
 
     #show name on table custommer
