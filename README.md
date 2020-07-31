@@ -27,16 +27,3 @@
 
 # Install สำหรับกรองข้อมูล
 [+]pip install django-filter<br>
-
-### File System<bt>
-[+]accounts<br>
-  [+]templates<br>
-    [+]accounts <br>
-      + dashboard.html <br>
-      + profile.html <br>
-      + customer.html <br>
-
-
-
-### Time :
-[+] 
